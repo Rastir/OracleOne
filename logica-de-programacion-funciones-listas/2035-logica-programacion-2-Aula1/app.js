@@ -1,7 +1,10 @@
-let numeroSecreto = 0; 
+let numeroSecreto = 0;
 let numeroIntentos = 0;
 
-function asignarTextoElemento(elemento, texto){
+let listaNUmerosSorteados = [];
+let numeroMaximo = 10;
+
+function asignarTextoElemento(elemento, texto) {
     let elementoHTML = document.querySelector(elemento);
     elementoHTML.innerHTML = texto;
     return;
@@ -9,14 +12,14 @@ function asignarTextoElemento(elemento, texto){
 
 function verificarIntento() {
     numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
-    
+
     console.log(numeroIntentos);
-    if (numeroSecreto == numeroDeUsuario){
+    if (numeroSecreto == numeroDeUsuario) {
         asignarTextoElemento('p', `Acertaste el numero en ${numeroIntentos} ${(numeroIntentos === 1) ? 'intento' : 'intentos'} `)
-        document.getElementById('reiniciar').removeAttribute('disabled');    
+        document.getElementById('reiniciar').removeAttribute('disabled');
     } else {
         //usuario no acertó !
-        if (numeroDeUsuario > numeroSecreto){
+        if (numeroDeUsuario > numeroSecreto) {
             asignarTextoElemento('p', `Uhhh! casi, el numero es mayor que el numero secreto`);
         } else {
             asignarTextoElemento('p', `Uhhh! casi, el numero es menor que el numero secreto`);
@@ -27,7 +30,7 @@ function verificarIntento() {
     return;
 }
 
-function limpiarCaja(){
+function limpiarCaja() {
 
     let valorCaja = document.querySelector('#valorUsuario');
     valorCaja.value = '';
@@ -35,14 +38,14 @@ function limpiarCaja(){
     //Tambien se puede hacer más corto haciendo solo (document.querySelector ('#valorUsuario').value = ''; )
 }
 
-function condicionesIniciales(){
+function condicionesIniciales() {
     asignarTextoElemento('h1', "Juego del numero secreto");
-    asignarTextoElemento('p', "Ingresa un numero del 1 al 100");
+    asignarTextoElemento('p', `Ingresa un numero del 1 al ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
     numeroIntentos = 1;
 }
-  
-function reiniciarJuego(){
+
+function reiniciarJuego() {
     //limpiar la caja
     limpiarCaja();
     //refrescar el sistema
@@ -50,12 +53,29 @@ function reiniciarJuego(){
     //crear nuevo numero secreto
     numeroSecreto = generarNumeroSecreto();
     //deshabilitar boton de nuevo juego 
-    document.querySelector('#reiniciar').setAttribute('disabled',true);
-    
+    document.querySelector('#reiniciar').setAttribute('disabled', true);
+
 }
 
 function generarNumeroSecreto() {
-    return Math.floor(Math.random()*10) + 1;
+    let numeroGenerado = Math.floor(Math.random() * numeroMaximo) + 1;
+    //Si el numero generado está incluido en la lista realizar una acción de lo contrario ejecutar lo mismo
+
+    console.log(numeroGenerado);
+    console.log(listaNUmerosSorteados);
+
+    //Si  le numero generado está incluido en la lista 
+    if (listaNUmerosSorteados.length == numeroMaximo) {
+        asignarTextoElemento('p', 'Ya se han asignados todos los numeros posibles ! ');
+    } else {
+
+        if (listaNUmerosSorteados.includes(numeroGenerado)) {
+            return generarNumeroSecreto();
+        } else {
+            listaNUmerosSorteados.push(numeroGenerado);
+            return numeroGenerado;
+        }
+    }
 }
 
 condicionesIniciales();
