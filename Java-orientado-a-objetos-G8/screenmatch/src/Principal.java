@@ -1,24 +1,22 @@
+import com.alluracursos.screenmatch.model.Pelicula;
+
 public class Principal {
     public static void main(String[] args) {
 
         Pelicula miPelicula = new Pelicula();
         Pelicula otraPelicula = new Pelicula();
 
-        miPelicula.nombre = "Matrix";
-        miPelicula.fechaDeLanzamiento = 2021;
-        miPelicula.duracionMinutos = 180;
+        miPelicula.setNombre("Matrix");
+        miPelicula.setFechaDeLanzamiento(1998);
+        miPelicula.setDuracionMinutos(120);
+        miPelicula.setIncluidoEnElPlan(true);
         miPelicula.evalua(10);
         miPelicula.evalua(9.8);
-
-
-        otraPelicula.nombre = "Alamo";
-        otraPelicula.fechaDeLanzamiento = 1999;
-        otraPelicula.duracionMinutos = 12;
+        miPelicula.evalua(7);
 
         miPelicula.muestraFichaTecnica();
-        System.out.println(miPelicula.totalEvaluaciones);
-        System.out.println(miPelicula.sumaEvaluaciones);
-        System.out.println(miPelicula.calculaMedia());
-        otraPelicula.muestraFichaTecnica();
+        System.out.println(miPelicula.getTotalEvaluaciones()    );
+
+
     }
 }
