@@ -1,6 +1,8 @@
+import com.alluracursos.screenmatch.model.Episodio;
 import com.alluracursos.screenmatch.model.Pelicula;
 import com.alluracursos.screenmatch.model.Serie;
 import com.aluracursos.screenmatch.calculos.CalculadoraDeTiempo;
+import com.aluracursos.screenmatch.calculos.FiltroRecomendacion;
 
 public class Principal {
     public static void main(String[] args) {
@@ -31,6 +33,19 @@ public class Principal {
         calculadoraDeTiempo.incluye(miPelicula);
         calculadoraDeTiempo.incluye(casaDragon);
         System.out.println(calculadoraDeTiempo.getTiempoTotal());
+
+        FiltroRecomendacion filtroRecomendacion = new FiltroRecomendacion();
+
+        filtroRecomendacion.filtra(miPelicula);
+
+        Episodio episodio = new Episodio();
+
+        episodio.setNumero(1);
+        episodio.setNombre("el chiludo");
+        episodio.setSerie(casaDragon);
+        episodio.setTotalVisualizaciones(300);
+
+        filtroRecomendacion.filtra(episodio);   
 
     }
 }
