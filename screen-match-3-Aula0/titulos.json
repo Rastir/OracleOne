@@ -1,0 +1,18 @@
+[
+  {
+    "Nombre": "Solo",
+    "FechaDeLanzamiento": 1996,
+    "IncluidoEnElPlan": false,
+    "SumaDeLasEvaluaciones": 0.0,
+    "TotalDeEvaluaciones": 0,
+    "DuracionEnMinutos": 94
+  },
+  {
+    "Nombre": "Rango",
+    "FechaDeLanzamiento": 2011,
+    "IncluidoEnElPlan": false,
+    "SumaDeLasEvaluaciones": 0.0,
+    "TotalDeEvaluaciones": 0,
+    "DuracionEnMinutos": 107
+  }
+]
