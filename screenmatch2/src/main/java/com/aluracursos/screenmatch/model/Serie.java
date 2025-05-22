@@ -1,7 +1,5 @@
 package com.aluracursos.screenmatch.model;
 
-import com.aluracursos.screenmatch.service.ConsultaChatGPT;
-
 import java.util.OptionalDouble;
 
 public class Serie {
