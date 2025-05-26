@@ -12,5 +12,5 @@ public record DatosSerie(
         @JsonAlias("Genre") String genero,
         @JsonAlias("Actors")String actores,
         @JsonAlias("Country") String paisDeOrigen,
-        @JsonAlias("Sinopsis") String sinopsis){
+        @JsonAlias("Plot") String sinopsis){
 }
