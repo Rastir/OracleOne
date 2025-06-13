@@ -1,0 +1,18 @@
+instrucciones para cumplir el ejercicio. 
+
+1.- iniciar creando el programa con el inizializer, utilizar las siguientes dependencias: 
+
+	- JPA
+	- Spring Web
+	- Postgress
+	- Devtools
+
+2.- Con Postgress, crear una base de datos igual al proyecto al que vas a conectar
+
+3.- Configurar el applications properties
+
+4.- modelar código
+
+	- Crear paquete model con las clases
+	- crear un paquete controlador para la clase controladora
+	- crea todos los paquetes restantes
