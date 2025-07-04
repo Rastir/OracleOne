@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AutenticacionController {
 
-
     @Autowired
     private TokenService tokenService;
+
     @Autowired
     private AuthenticationManager manager;
 
     @PostMapping
-    public ResponseEntity iniciarSesion(@RequestBody @Valid DatosAutenticacion datos){
+    public ResponseEntity iniciarSesion(@RequestBody @Valid DatosAutenticacion datos) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(datos.login(), datos.contrasenia());
         var autenticacion = manager.authenticate(authenticationToken);
 
-        var tokenJWT= tokenService.generarToken((Usuario) autenticacion.getPrincipal());
+        var tokenJWT = tokenService.generarToken((Usuario) autenticacion.getPrincipal());
+
         return ResponseEntity.ok(new DatosTokenJWT(tokenJWT));
     }
-
 }
