@@ -2,6 +2,8 @@ package med.voll.api.controller;
 
 import med.voll.api.domain.consulta.DatosDetalleConsulta;
 import med.voll.api.domain.consulta.DatosReservaConsulta;
+import med.voll.api.domain.consulta.ReservaDeConsultas;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +17,14 @@ import java.beans.Transient;
 @RequestMapping("/consultas")
 public class ConsultaController {
 
+    @Autowired
+    private ReservaDeConsultas reserva;
+
     @PostMapping
     @Transactional
     public ResponseEntity reservar (@RequestBody DatosReservaConsulta datos){
-        System.out.println(datos);
+
+        reserva.reservar(datos);
         return ResponseEntity.ok(new DatosDetalleConsulta(null, null, null, null));
     }
 
