@@ -1,10 +1,10 @@
 package med.voll.api.domain.consulta;
 
 import med.voll.api.domain.ValidacionException;
-import med.voll.api.domain.consulta.validaciones.ValidadorDeConsultas;
+import med.voll.api.domain.consulta.validaciones.cancelamiento.ValidadorCancelamientoDeConsulta;
+import med.voll.api.domain.consulta.validaciones.reserva.ValidadorDeConsultas;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
-import med.voll.api.domain.paciente.Paciente;
 import med.voll.api.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,8 @@ public class ReservaDeConsultas {
     private ConsultaRepository consultaRepository;
     @Autowired
     private List<ValidadorDeConsultas> validadores;
+    @Autowired
+    private List<ValidadorCancelamientoDeConsulta> validadoresCancelamiento;
 
     public DatosDetalleConsulta reservar(DatosReservaConsulta datos){
 
@@ -58,9 +60,12 @@ public class ReservaDeConsultas {
     }
 
     public void cancelar(DatosCancelamientoConsulta datos) {
-        if(!consultaRepository.existsById(datos.idConsulta())){
-            throw new ValidacionException("Id de la consulta informada no existe");
+        if (!consultaRepository.existsById(datos.idConsulta())){
+            throw new ValidacionException(("El Id ingresado de la consulta no existe"));
         }
+
+        validadoresCancelamiento.forEach(v -> v.validar(datos));
+
         var consulta = consultaRepository.getReferenceById(datos.idConsulta());
         consulta.cancelar(datos.motivo());
     }
